@@ -40,7 +40,7 @@ def search(request):
         with open(file_path, "rb") as f:
             model = pickle.load(f)
             queries_df = pd.DataFrame([{"qid": "1", "query": query}])
-            result = model.transform(queries_df).sort_values(by=['rank'], ascending=[ True])[:50]
+            result = model.transform(queries_df).sort_values(by=['rank'], ascending=[ True])[:30]
            
             result_json = result.to_dict(orient="records")
 
