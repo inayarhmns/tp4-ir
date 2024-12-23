@@ -5,6 +5,8 @@ app_name = 'search'
 
 urlpatterns = [
    path('', search, name='search'),
-   path('hi', hi, name='search')
+   path('home', home, name='home'),
+   path('detail/<int:docno>/', detail, name='detail'),
+   path('hi', hi, name='hi')
 
 ]
