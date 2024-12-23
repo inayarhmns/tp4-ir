@@ -53,6 +53,33 @@ def search(request):
             }, status=200)
     return HttpResponseNotFound()
 
+def home(request):
+    results = []
+    query = ""
+
+    if not pt.started():
+        pt.init()
+    
+    if request.method == "POST":
+        query = request.POST.get("query", "")
+        query = normalize_to_english(remove_nonalphanum(query))
+
+        # dummy
+        results = [{"rank": 1, "docno": 12, "docname": "hello", "score": 123}, {"rank": 2, "docno": 13, "docname": "world", "score": 100}, {"rank": 1, "docno": 12, "docname": "hello", "score": 123}, {"rank": 2, "docno": 13, "docname": "world", "score": 100}]
+
+        # Load the model
+        # file_path = os.path.join(os.getcwd(), "model.pkl")
+        # with open(file_path, "rb") as f:
+        #     model = pickle.load(f)
+        #     queries_df = pd.DataFrame([{"qid": "1", "query": query}])
+        #     result = model.transform(queries_df).sort_values(by=['rank'], ascending=True)[:50]
+        #     results = result.to_dict(orient="records")
+    
+    return render(request, "serp.html", {"query": query, "results": results})
+
+def detail(request, docno):
+    document = {"rank": 1, "docno": docno, "docname": "hello", "score": 123}
+    return render(request, 'detail.html', {'document': document})
 
 def hi(request):
     return  JsonResponse({

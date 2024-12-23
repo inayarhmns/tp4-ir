@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Document Details</h1>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">{{ document.docno }}</h5>
+        <p class="card-text">Rank: {{ document.rank }}</p>
+        <p class="card-text">Score: {{ document.score }}</p>
+        <p class="card-text">Additional details go here...</p>
+    </div>
+</div>
+
+<a href="{% url 'search:home' %}" class="btn btn-secondary mt-3">Back to Search</a>
+{% endblock content %}
