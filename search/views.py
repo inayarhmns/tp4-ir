@@ -10,11 +10,10 @@ import pyterrier as pt
 
 import unicodedata
 import re
+# import spacy
+# from spacy.lang.en.stop_words import STOP_WORDS
 
-import nltk
-from nltk.corpus import stopwords
-
-nltk.download('stopwords')
+# nlp = spacy.load("en_core_web_sm")
 
 def remove_nonalphanum(text):
   pattern = re.compile('[\W_]+')
@@ -39,12 +38,12 @@ def search(query, docno=None):
     # if request.method == 'POST':
     #     print(request.POST)
     #     query = request.POST.get("query")
-    stop_words = set(stopwords.words('english'))
-
+    # stop_words = set(stopwords.words('english'))
+    # doc = nlp(text)
     stemmer = pt.index.TerrierStemmer('porter')
     query = normalize_to_english(remove_nonalphanum(query))
-    cleaned = [i for i in query.split() if i not in stop_words]
-    cleaned = [stemmer.stem(i) for i in cleaned]
+    # cleaned = [i for i in query.split() if i not in stop_words]
+    cleaned = [stemmer.stem(i) for i in query.split()]
     cleaned = " ".join(cleaned)
     cleaned = cleaned.strip()
     result = ""
@@ -76,7 +75,7 @@ def search(query, docno=None):
 
 @csrf_exempt
 def home(request):
-    stop_words = set(stopwords.words('english'))
+    
     results = []
     query = ""
 
