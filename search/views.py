@@ -59,7 +59,10 @@ def search(query, docno=None):
         docnos = result['docno']  
         # print('docnos')
         # print(docnos)
-        collections = pd.read_csv('search/collections.csv')
+        dataset = pt.get_dataset('irds:cord19/trec-covid/round1')
+        collections = pd.DataFrame(dataset.get_corpus_iter())
+
+        # collections = pd.read_csv('search/collections.csv')
         text_and_abstract = collections[collections['docno'].isin(docnos)]
         result = pd.merge(result, text_and_abstract, on='docno', how='left')
         # print(result)
