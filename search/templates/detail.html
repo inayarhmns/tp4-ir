@@ -5,10 +5,34 @@
 
 <div class="card">
     <div class="card-body">
-        <h5 class="card-title">{{ document.docno }}</h5>
-        <p class="card-text">Rank: {{ document.rank }}</p>
-        <p class="card-text">Score: {{ document.score }}</p>
-        <p class="card-text">Additional details go here...</p>
+        {% if message %}
+            <p>{{ message }}</p>
+        {% elif document %}
+        <div class="mx-auto" style="max-width: 700px; margin: 0 auto; padding: 10px;">
+            <div class="container text-center" style="display: flex; justify-content: space-between;
+            padding: 20px; color: #0CB2D0;"> 
+                <p > DOCNO: {{document.docno}} </p>
+                <p >Rank: {{document.rank}} </p>
+                <p >Score: {{document.score}} </p>
+
+
+            </div>
+            
+            <div class="text-center">
+                <div>
+                    <p class="fw-semibold mb-1">Date: {{ document.date }}</p>
+                    <p class="fw-semibold mb-1">DOI: {{ document.doi }}</p>
+                    <p class="fw-semibold mb-1">Score: {{ document.score }}</p>
+                </div>
+                
+            
+            <h2 class="card-title">{{ document.title }}</h2>
+            <p class="card-text">{{ document.abstract }}</p>
+            </div>
+        </div>
+            
+            
+        {% endif %}
     </div>
 </div>
 
